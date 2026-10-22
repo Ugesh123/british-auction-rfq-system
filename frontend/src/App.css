@@ -198,3 +198,43 @@ tbody tr:hover, .selected-row { background: #faf9ff; }
   .activity-item time { margin-left: 44px; text-align: left; }
   .footer { gap: 10px; flex-wrap: wrap; }
 }
+/* Create RFQ form layout */
+.rfq-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rfq-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.rfq-form input,
+.rfq-form select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.rfq-form .trigger-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rfq-form .trigger-options label {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.rfq-form .trigger-options input {
+  width: auto;
+}

@@ -66,10 +66,16 @@ const money = (value: number | null | undefined) => {
 
 const dateTime = (value?: string | null) => {
   if (!value) return '—'
-  const date = new Date(value)
-  return Number.isNaN(date.getTime()) ? value : date.toLocaleString('en-IN')
-}
 
+  const hasTimezone = /(?:Z|[+-]\d{2}:\d{2})$/i.test(value)
+  const date = new Date(hasTimezone ? value : `${value}Z`)
+
+  return Number.isNaN(date.getTime())
+    ? value
+    : date.toLocaleString('en-IN', {
+        timeZone: 'Asia/Kolkata',
+      })
+}
 function App() {
   const [rfqs, setRfqs] = useState<RFQ[]>([])
   const [selectedId, setSelectedId] = useState<number | null>(null)
@@ -386,7 +392,7 @@ const loadDetails = useCallback(async (id: number) => {
               </button>
             </div>
 
-            <form onSubmit={createRFQ}>
+            <form className="rfq-form" onSubmit={createRFQ}>
               <div className="form-grid">
                 <label className="field full-field">
                   RFQ name
