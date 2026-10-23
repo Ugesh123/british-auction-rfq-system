@@ -1,9 +1,10 @@
-
-import os
+﻿import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-DATABASE_URL = os.getenv("postgresql://neondb_owner:npg_pnSNxZv7zP8s@ep-crimson-feather-b5wtnxnb-pooler.c-7.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require", "sqlite:///./british_auction.db")
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./british_auction.db")
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
 connect_args = {}
 if DATABASE_URL.startswith("sqlite"):

@@ -1,4 +1,4 @@
-from fastapi.middleware.cors import CORSMiddleware
+﻿from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime, timezone, timedelta
 
 from fastapi import Depends, FastAPI, HTTPException
@@ -13,11 +13,8 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI(title="British Auction RFQ API")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "https://frontend-ebon-psi-57.vercel.app",
-    ],
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -417,3 +414,4 @@ def submit_bid(
             status_code=500,
             detail=f"Could not submit bid: {str(exc)}",
         )
+
